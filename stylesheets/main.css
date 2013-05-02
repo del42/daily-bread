@@ -1,0 +1,63 @@
+
+body
+{
+    background-image:url('w.jpg');
+    background-position: center center;
+    background-attachment: fixed;
+    background-size: cover;
+    position: relative;
+    margin-top: 2em;
+    margin-left: 3em;
+    margin-right: 3em;
+    margin-bottom: 3em;
+    font:  bold small-caps 120%/120% fantasy;
+    color: white;
+}
+.header{
+    height: 50px; 
+}
+.upload{
+
+
+}
+.signin{
+    position: relative;
+    float: right;
+
+}
+img{
+    margin:1em;
+    opacity:1.0;
+    filter:alpha(opacity=100); 
+    position: relative;
+    width: 400px;
+    height: auto;
+    border:6px ridge #545565;
+}
+img:hover
+{
+    opacity:0.4;
+    filter:alpha(opacity=40); 
+}
+
+iframe{
+    margin:1em;
+    opacity:1.0;
+    filter:alpha(opacity=100); 
+    position: relative;
+    width: 304px;
+    height: 154px;
+}
+.form {
+    width: 100px;
+    height: 40px;
+    
+}
+button{
+    position: relative;
+    right: 230px;
+    
+}
+button:hover{
+    display: inline;
+}

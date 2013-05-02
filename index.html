@@ -1,0 +1,113 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.1/themes/base/jquery-ui.css" />
+    <script src="http://code.jquery.com/jquery-1.8.2.js"></script>
+    <script src="http://code.jquery.com/ui/1.9.1/jquery-ui.js"></script>
+<title>Daily Bread</title>
+
+<link rel="stylesheet" type="text/css" href="stylesheets/styles.css" />
+    <script language="Javascript">
+        function Button2()
+        {
+            document.Form.action = "/delapp"
+            document.Form.submit();
+            return true;
+        }
+        </script>
+</head>
+
+<body>
+
+        <div class="signin">
+       
+        {% if user %}
+        <b>{{ user.nickname }}!</b>
+        [<a href="{{ logout }}"><b>sign out</b></a>]
+            </div>
+        <div class="upload">
+        <form action="{{upload_url}}" method="POST" enctype="multipart/form-data">
+        Upload Image: <input type="file" name="delUpload"><br>
+        Select Date <input name="type" type="date" value="{{today}}">
+            <input type="submit" name="submit" value="Upload">
+        </form>
+        </div>
+        {% for data in datas %}
+        {% ifequal user|stringformat:"s" data.email|stringformat:"s" %}
+
+            <a href="http://localhost:8080/download/{{data.image_key}}">
+            <img src="http://localhost:8080/download/{{data.image_key}}" align="middle" ></a>
+           
+            <form class = "form" action="/delapp" method="post">
+                    <input type="text" name="key" value="{{data.image_key}}" style="display:none">
+                        <input type="submit" value="Delete {{data.type}}">
+                </form>
+               
+        {% endifequal %}
+        {% endfor %}
+        
+        {% else %}
+        <b>Admin</b>,
+        [<a href="{{ login }}"><b>sign in</b></a>]
+        
+        {% endif %}
+        </div>       
+        <hr>
+            
+
+<div id="main">      
+
+<h1>Daily Bread</h1>
+
+{% for data in datas %}
+        {% ifequal today|stringformat:"s" data.type|stringformat:"s" %}
+            <div class="bread">
+                <div class="leftbread">
+                    <a href="http://localhost:8080/download/{{data.image_key}}" style="text-decoration: none;color:#7E94A2;">
+                        &#8249
+                            </a>
+                </div>
+            <a href="http://localhost:8080/download/{{data.image_key}}">
+            <img src="http://localhost:8080/download/{{data.image_key}}"></a>
+                <div class="rigthbread">
+                    <a href="http://localhost:8080/download/{{data.image_key}}" style="text-decoration: none;color:#7E94A2;">
+                        &#8250
+                            </a>
+                </div>
+            </div>    
+<h1>{{today}}</h1>
+    {% for comment in comments %}
+    {% ifequal comment.comment_image|stringformat:"s" data.image_key|stringformat:"s" %}
+    <div id="addCommentContainer">
+            <div>
+                <label for="comment">{{comment.comment}}</label>
+                <br>
+                <label for="commenter">{{comment.name}} </label>
+                <label for="date">{{comment.comment_date}}</label>
+            </div>
+        </form>
+    </div>
+    {% endifequal %}
+    {% endfor %}
+<div id="addCommentContainer">
+	<form id="addCommentForm" method="post" action="/comment">
+    	<div>
+            <label for="name">Guest</label>
+            <input type="text" name="name" id="name" value="Guest"/>
+            <label for="body">Comment</label>
+            <textarea id="body" name="comment" cols="20" rows="4"></textarea>
+            <input type="text" name="comment_image" value="{{data.image_key}}" style="display:none">
+            <input name="type" type="comment_date" value="{{today}}" style="display:none">
+            <input type="submit" id="submit" value="Submit" />
+        </div>
+    </form>
+</div>
+    {% endifequal %}
+    {% endfor %}
+
+</div>
+
+</body>
+</html>
